@@ -1,0 +1,125 @@
+/* 基础样式 - 默认移动端视图 (Mobile First) */
+body {
+    background-color: #dedede;
+    margin: 0;
+    padding: 10px;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    text-align: center;
+    font-size: 32px;
+}
+
+p {
+    font-size: 18px;
+    line-height: 1.6;
+    text-align: center;
+    padding: 0 10px;
+}
+
+/* 步骤 4a: 移动端使用单列网格，间距 10px */
+.grid {
+    display: grid;
+    grid-template-columns: 1fr; /* 单列 */
+    gap: 10px;                 /* 行间距和列间距 10px */
+    padding: 10px;
+}
+
+figure {
+    margin: 0;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border: 2px solid #ccc;
+    text-align: center;
+}
+
+figure img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+figcaption {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* ==========================================
+   步骤 5: Tablet View (触发点: 772px)
+   ========================================== */
+@media screen and (min-width: 772px) {
+    .grid {
+        grid-template-columns: 1fr 1fr; /* 步骤 5a: 两列布局 */
+    }
+
+    figure {
+        /* 步骤 5b: 设置圆角创造圆形效果 */
+        border-radius: 50%;
+        overflow: hidden; /* 确保图片不超出圆角 */
+        aspect-ratio: 1 / 1; /* 保持正圆 */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* 步骤 5c: 设置最后一个 figure 占据两列 */
+    figure:last-child {
+        grid-column: 1 / span 2;
+        border-radius: 20px; /* 占据两列时圆形会变形，通常改为大圆角矩形 */
+    }
+}
+
+/* ==========================================
+   步骤 6: Large Screen View (触发点: 992px)
+   ========================================== */
+@media screen and (min-width: 992px) {
+    .grid {
+        grid-template-columns: 1fr 1fr 1fr; /* 变成三列更美观 */
+    }
+
+    figure {
+        /* 步骤 6b: 移除所有 figure 的圆角 */
+        border-radius: 0;
+        aspect-ratio: auto;
+    }
+
+    /* 步骤 6a: 设置每三张图片中的第三张占据两列 */
+    figure:nth-child(3n) {
+        grid-column: span 2;
+    }
+}
+
+/* ==========================================
+   步骤 7: Prefers-Reduced-Motion (减弱动画)
+   ========================================== */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        /* 步骤 7a: 移除滚动行为（变为立即跳转而非平滑滚动） */
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ==========================================
+   步骤 8: Dark Color Scheme (暗黑模式)
+   ========================================== */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #1a1a1a;
+        color: #f0f0f0;
+    }
+
+    figure {
+        /* 步骤 8a: 背景改为深色 */
+        background-color: #333;
+        /* 步骤 8b: 字体改为浅黄色 (符合对比度要求) */
+        color: #fff9c4;
+        /* 步骤 8c: 边框改为黑色 */
+        border-color: #000;
+    }
+    
+    a {
+        color: #ffeb3b; /* 链接也相应调亮 */
+    }
+}
