@@ -1,125 +1,161 @@
-/* 基础样式 - 默认移动端视图 (Mobile First) */
+/* Pet Water Bowl - Modern Responsive Design */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-    background-color: #dedede;
-    margin: 0;
-    padding: 10px;
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', system-ui, Arial, sans-serif;
+    line-height: 1.7;
+    color: #333;
+    background-color: #f8fafc;
 }
 
-h1 {
+/* Header */
+header {
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    color: white;
+    padding: 2.5rem 0;
     text-align: center;
-    font-size: 32px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-p {
-    font-size: 18px;
-    line-height: 1.6;
+header h1 {
+    font-size: 2.8rem;
+    margin-bottom: 0.5rem;
+}
+
+header p {
+    font-size: 1.3rem;
+    opacity: 0.95;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Navigation */
+nav {
+    background-color: #1e2937;
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    list-style: none;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.8rem 1.6rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+nav a:hover {
+    background-color: #3b82f6;
+    transform: translateY(-3px);
+}
+
+/* Main */
+main {
+    max-width: 1280px;
+    margin: 3rem auto;
+    padding: 0 1.5rem;
+}
+
+/* Hero */
+.hero {
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('images/hero.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
     text-align: center;
-    padding: 0 10px;
+    padding: 6rem 2rem;
+    border-radius: 16px;
+    margin-bottom: 4rem;
 }
 
-/* 步骤 4a: 移动端使用单列网格，间距 10px */
-.grid {
+.hero h2 {
+    font-size: 2.6rem;
+    margin-bottom: 1rem;
+}
+
+/* Feature Cards */
+.card-grid {
     display: grid;
-    grid-template-columns: 1fr; /* 单列 */
-    gap: 10px;                 /* 行间距和列间距 10px */
-    padding: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
 }
 
-figure {
-    margin: 0;
-    padding: 15px;
-    background-color: #f9f9f9;
-    border: 2px solid #ccc;
-    text-align: center;
+.card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s ease;
 }
 
-figure img {
+.card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.15);
+}
+
+.card img {
     width: 100%;
-    height: auto;
-    display: block;
+    height: 240px;
+    object-fit: cover;
 }
 
-figcaption {
-    margin-top: 10px;
-    font-weight: bold;
+.card-content {
+    padding: 1.8rem;
 }
 
-/* ==========================================
-   步骤 5: Tablet View (触发点: 772px)
-   ========================================== */
-@media screen and (min-width: 772px) {
-    .grid {
-        grid-template-columns: 1fr 1fr; /* 步骤 5a: 两列布局 */
-    }
-
-    figure {
-        /* 步骤 5b: 设置圆角创造圆形效果 */
-        border-radius: 50%;
-        overflow: hidden; /* 确保图片不超出圆角 */
-        aspect-ratio: 1 / 1; /* 保持正圆 */
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-    /* 步骤 5c: 设置最后一个 figure 占据两列 */
-    figure:last-child {
-        grid-column: 1 / span 2;
-        border-radius: 20px; /* 占据两列时圆形会变形，通常改为大圆角矩形 */
-    }
+.card h3 {
+    color: #1e40af;
+    margin-bottom: 1rem;
 }
 
-/* ==========================================
-   步骤 6: Large Screen View (触发点: 992px)
-   ========================================== */
-@media screen and (min-width: 992px) {
-    .grid {
-        grid-template-columns: 1fr 1fr 1fr; /* 变成三列更美观 */
-    }
-
-    figure {
-        /* 步骤 6b: 移除所有 figure 的圆角 */
-        border-radius: 0;
-        aspect-ratio: auto;
-    }
-
-    /* 步骤 6a: 设置每三张图片中的第三张占据两列 */
-    figure:nth-child(3n) {
-        grid-column: span 2;
-    }
+/* Footer */
+footer {
+    background-color: #1e2937;
+    color: #cbd5e1;
+    text-align: center;
+    padding: 3rem 1.5rem;
+    margin-top: 5rem;
 }
 
-/* ==========================================
-   步骤 7: Prefers-Reduced-Motion (减弱动画)
-   ========================================== */
-@media (prefers-reduced-motion: reduce) {
-    html {
-        /* 步骤 7a: 移除滚动行为（变为立即跳转而非平滑滚动） */
-        scroll-behavior: auto !important;
-    }
-}
-
-/* ==========================================
-   步骤 8: Dark Color Scheme (暗黑模式)
-   ========================================== */
-@media (prefers-color-scheme: dark) {
-    body {
-        background-color: #1a1a1a;
-        color: #f0f0f0;
-    }
-
-    figure {
-        /* 步骤 8a: 背景改为深色 */
-        background-color: #333;
-        /* 步骤 8b: 字体改为浅黄色 (符合对比度要求) */
-        color: #fff9c4;
-        /* 步骤 8c: 边框改为黑色 */
-        border-color: #000;
+/* Responsive Design */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2.3rem;
     }
     
-    a {
-        color: #ffeb3b; /* 链接也相应调亮 */
+    nav ul {
+        gap: 1rem;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .hero {
+        padding: 4.5rem 1.5rem;
+    }
+    
+    .card-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    main {
+        padding: 0 1rem;
     }
 }
